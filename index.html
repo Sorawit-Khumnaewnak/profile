@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="icon" type="image/png" href="head/logo.png" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sorawit-Profile</title>
+		<style type="text/css">
+			body {
+				background-color: #070d48;
+				transition: background-color 5s;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var colors = ["#28328f", "#288f81", "#82b432", "#cc8a35", "#eb5945", "#af2d2d"];
+			var i = 1;
+			window.setInterval(function () {
+				document.body.style.backgroundColor = colors[i];
+				i++;
+				if (i === colors.length) {
+					i = 0;
+				}
+			}, 2000);
+		</script>
+		<center><img src="data/6010210249_CV01-01.jpg" width="60%" /></center>
+	</body>
+</html>
