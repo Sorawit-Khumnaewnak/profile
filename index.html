@@ -10,9 +10,57 @@
 				background-color: #070d48;
 				transition: background-color 5s;
 			}
+			* {
+				box-sizing: border-box;
+			}
+			#photos {
+				transition: transform 0.2s;
+			}
+			#photos:hover {
+				-ms-transform: scale(1.5); /* IE 9 */
+				-webkit-transform: scale(1.5); /* Safari 3-8 */
+				transform: scale(1.5);
+			}
 		</style>
 	</head>
 	<body>
+		<h1>
+			<center><font color="#ffff">My Profile</font></center>
+		</h1>
+		<hr />
+		<h2 style="margin: 5%;">
+			<font color="FFD088">
+				My Profile
+				<ul>
+					<li>
+						Name: Mr.Sorawit Khumnaewnak
+					</li>
+					<li>
+						Age: 22
+					</li>
+					<li>
+						Status: Single
+					</li>
+				</ul>
+				Studying
+				<ul>
+					<li>
+						Prince of Songkla University
+					</li>
+					<li>
+						Sci - ICT
+					</li>
+					<li>
+						Senior (fourth-year)
+					</li>
+				</ul>
+			</font>
+		</h2>
+		<hr />
+		<h1>
+			<center><font color="#ffff">My Resume</font></center>
+		</h1>
+		<hr />
 		<script type="text/javascript">
 			var colors = ["#28328f", "#288f81", "#82b432", "#cc8a35", "#eb5945", "#af2d2d"];
 			var i = 1;
@@ -24,6 +72,6 @@
 				}
 			}, 2000);
 		</script>
-		<center><img src="data/6010210249_CV01-01.jpg" width="60%" /></center>
+		<center style="margin: 5%;"><img src="data/6010210249_CV01-01.jpg" width="60%" id="photos" /></center>
 	</body>
 </html>
