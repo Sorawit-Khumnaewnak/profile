@@ -1,77 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<link rel="icon" type="image/png" href="head/logo.png" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Sorawit-Profile</title>
+		<title>Geolocation</title>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWbD_geSb4hHWEDXhyx6q7jbpmGZz8_9E&callback=initMap&libraries=&v=weekly" defer></script>
 		<style type="text/css">
+			/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+			#map {
+				height: 100%;
+			}
+
+			/* Optional: Makes the sample page fill the window. */
+			html,
 			body {
-				background-color: #070d48;
-				transition: background-color 5s;
-			}
-			* {
-				box-sizing: border-box;
-			}
-			#photos {
-				transition: transform 0.2s;
-			}
-			#photos:hover {
-				-ms-transform: scale(1.5); /* IE 9 */
-				-webkit-transform: scale(1.5); /* Safari 3-8 */
-				transform: scale(1.5);
+				height: 100%;
+				margin: 0;
+				padding: 0;
 			}
 		</style>
+		<script>
+			(function (exports) {
+				"use strict";
+
+				// Note: This example requires that you consent to location sharing when
+				// prompted by your browser. If you see the error "The Geolocation service
+				// failed.", it means you probably did not give permission for the browser to
+				// locate you.
+				var infoWindow;
+
+				function initMap() {
+					exports.map = new google.maps.Map(document.getElementById("map"), {
+						center: {
+							lat: -34.397,
+							lng: 150.644,
+						},
+						zoom: 6,
+					});
+					infoWindow = new google.maps.InfoWindow(); // Try HTML5 geolocation.
+
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(
+							function (position) {
+								var pos = {
+									lat: position.coords.latitude,
+									lng: position.coords.longitude,
+								};
+								infoWindow.setPosition(pos);
+								infoWindow.setContent("Location found.");
+								infoWindow.open(exports.map);
+								exports.map.setCenter(pos);
+							},
+							function () {
+								handleLocationError(true, infoWindow, exports.map.getCenter());
+							}
+						);
+					} else {
+						// Browser doesn't support Geolocation
+						handleLocationError(false, infoWindow, exports.map.getCenter());
+					}
+				}
+
+				function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+					infoWindow.setPosition(pos);
+					infoWindow.setContent(
+						browserHasGeolocation ? "Error: The Geolocation service failed." : "Error: Your browser doesn't support geolocation."
+					);
+					infoWindow.open(exports.map);
+				}
+
+				exports.handleLocationError = handleLocationError;
+				exports.initMap = initMap;
+			})((this.window = this.window || {}));
+		</script>
 	</head>
 	<body>
-		<h1>
-			<center><font color="#ffff">My Profile</font></center>
-		</h1>
-		<hr />
-		<h2 style="margin: 5%;">
-			<font color="FFD088">
-				My Profile
-				<ul>
-					<li>
-						Name: Mr.Sorawit Khumnaewnak
-					</li>
-					<li>
-						Age: 22
-					</li>
-					<li>
-						Status: Single
-					</li>
-				</ul>
-				Studying
-				<ul>
-					<li>
-						Prince of Songkla University
-					</li>
-					<li>
-						Sci - ICT
-					</li>
-					<li>
-						Senior (fourth-year)
-					</li>
-				</ul>
-			</font>
-		</h2>
-		<hr />
-		<h1>
-			<center><font color="#ffff">My Resume</font></center>
-		</h1>
-		<hr />
-		<script type="text/javascript">
-			var colors = ["#28328f", "#288f81", "#82b432", "#cc8a35", "#eb5945", "#af2d2d"];
-			var i = 1;
-			window.setInterval(function () {
-				document.body.style.backgroundColor = colors[i];
-				i++;
-				if (i === colors.length) {
-					i = 0;
-				}
-			}, 2000);
-		</script>
-		<center style="margin: 5%;"><img src="data/6010210249_CV01-01.jpg" width="60%" id="photos" /></center>
+		<div id="map"></div>
 	</body>
 </html>
